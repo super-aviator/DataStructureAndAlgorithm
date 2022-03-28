@@ -1,4 +1,4 @@
-package algorithm.leetcode;
+package xqk.learn.datastructurealgorithm.algorithm.leetcode;
 
 class MyAtoi {
     public static int getStatus(char c) {

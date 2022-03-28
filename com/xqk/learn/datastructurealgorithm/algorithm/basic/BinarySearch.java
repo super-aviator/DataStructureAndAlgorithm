@@ -1,4 +1,4 @@
-package algorithm.basic;
+package xqk.learn.datastructurealgorithm.algorithm.basic;
 
 import java.util.Arrays;
 

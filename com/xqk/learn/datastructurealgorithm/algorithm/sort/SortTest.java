@@ -1,12 +1,12 @@
-package algorithm.sort;
+package xqk.learn.datastructurealgorithm.algorithm.sort;
 
-import algorithm.sort.impl.BubbleSort;
-import algorithm.sort.impl.InsertionSort;
-import algorithm.sort.impl.MergeSort;
-import algorithm.sort.impl.QuickSort;
-import algorithm.sort.impl.SelectionSort;
-import algorithm.sort.impl.ShellSort;
-import algorithm.sort.interfaces.Sort;
+import xqk.learn.datastructurealgorithm.algorithm.sort.impl.BubbleSort;
+import xqk.learn.datastructurealgorithm.algorithm.sort.impl.InsertionSort;
+import xqk.learn.datastructurealgorithm.algorithm.sort.impl.MergeSort;
+import xqk.learn.datastructurealgorithm.algorithm.sort.impl.QuickSort;
+import xqk.learn.datastructurealgorithm.algorithm.sort.impl.SelectionSort;
+import xqk.learn.datastructurealgorithm.algorithm.sort.impl.ShellSort;
+import xqk.learn.datastructurealgorithm.algorithm.sort.interfaces.Sort;
 
 public class SortTest {
     private final Integer[] NUMS = {67, 1, 50, 99, 4, 20, 324, 23, 999};

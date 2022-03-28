@@ -1,6 +1,6 @@
-package algorithm.sort.impl;
+package xqk.learn.datastructurealgorithm.algorithm.sort.impl;
 
-import algorithm.sort.interfaces.Sort;
+import xqk.learn.datastructurealgorithm.algorithm.sort.interfaces.Sort;
 
 /**
  * 选择排序：对于p，每次从p~length-1中选择最小的数插入到p-1位置

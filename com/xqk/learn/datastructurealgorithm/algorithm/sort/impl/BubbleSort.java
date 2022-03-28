@@ -1,6 +1,6 @@
-package algorithm.sort.impl;
+package xqk.learn.datastructurealgorithm.algorithm.sort.impl;
 
-import algorithm.sort.interfaces.Sort;
+import xqk.learn.datastructurealgorithm.algorithm.sort.interfaces.Sort;
 
 /**
  * 冒泡排序：从左到右，将最大的数据冒泡到最右边

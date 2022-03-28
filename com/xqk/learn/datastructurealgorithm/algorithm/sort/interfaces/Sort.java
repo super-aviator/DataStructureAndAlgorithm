@@ -1,4 +1,4 @@
-package algorithm.sort.interfaces;
+package xqk.learn.datastructurealgorithm.algorithm.sort.interfaces;
 
 import java.util.Arrays;
 

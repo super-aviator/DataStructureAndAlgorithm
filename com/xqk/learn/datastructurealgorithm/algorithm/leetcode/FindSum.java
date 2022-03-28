@@ -1,4 +1,4 @@
-package algorithm.leetcode;
+package xqk.learn.datastructurealgorithm.algorithm.leetcode;
 
 import java.util.ArrayList;
 import java.util.List;

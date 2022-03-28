@@ -1,4 +1,4 @@
-package algorithm.leetcode;
+package xqk.learn.datastructurealgorithm.algorithm.leetcode;
 
 /**
  * 二进制间隙
