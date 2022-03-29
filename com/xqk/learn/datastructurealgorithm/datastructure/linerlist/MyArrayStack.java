@@ -8,12 +8,12 @@ import java.util.Arrays;
  * @author xiongqiankun
  * @since 2022/3/28 9:29
  */
-public class MyStack<E> {
+public class MyArrayStack<E> {
     private final Object[] items;
     private final int capacity;
     private int count;
 
-    public MyStack(int capacity) {
+    public MyArrayStack(int capacity) {
         this.items = new Object[capacity];
         this.capacity = capacity;
     }
@@ -43,7 +43,7 @@ public class MyStack<E> {
 
     public static void main(String[] args) {
         String str = "abcdefghijklmn";
-        MyStack<Character> stack = new MyStack<>(str.length());
+        MyArrayStack<Character> stack = new MyArrayStack<>(str.length());
         for (char ch : str.toCharArray()) {
             stack.push(ch);
         }
