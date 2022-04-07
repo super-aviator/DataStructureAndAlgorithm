@@ -24,25 +24,38 @@ public class QuickSort implements Sort<Integer> {
         sort(arr, j + 1, hi);
     }
 
-    private int partition(Integer[] arr, int lo, int hi) {
-        int mid = arr[lo], i = lo, j = hi + 1;
-        while (true) {
-            while (arr[++i].compareTo(mid) < 0) {
-                if (i >= hi) {
-                    break;
-                }
+    public int partition(Integer[] arr, int lo, int hi) {
+        int pivot = arr[lo];
+        int i = lo + 1, j = hi;
+        while (i <= j) {
+            if (arr[i].compareTo(pivot) > 0) {
+                swap(arr, i--, j--);
             }
-            while (arr[--j].compareTo(mid) > 0) {
-                if (j <= lo) {
-                    break;
-                }
-            }
-            if (i >= j) {
-                break;
-            }
-            swap(arr, i, j);
+            i++;
         }
         swap(arr, lo, j);
         return j;
     }
+
+    // private int partition(Integer[] arr, int lo, int hi) {
+    //     int mid = arr[lo], i = lo, j = hi + 1;
+    //     while (true) {
+    //         while (arr[++i].compareTo(mid) < 0) {
+    //             if (i >= hi) {
+    //                 break;
+    //             }
+    //         }
+    //         while (arr[--j].compareTo(mid) > 0) {
+    //             if (j <= lo) {
+    //                 break;
+    //             }
+    //         }
+    //         if (i >= j) {
+    //             break;
+    //         }
+    //         swap(arr, i, j);
+    //     }
+    //     swap(arr, lo, j);
+    //     return j;
+    // }
 }

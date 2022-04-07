@@ -7,7 +7,7 @@ import xqk.learn.datastructurealgorithm.algorithm.sort.interfaces.Sort;
  * 定义数组的中间位置，然后递归的将数组的前半部分排序，然后对数组的后半部分排序最后将两个排序后的数组合并到一个数组中
  * <p>
  * 最好最差时间复杂度均为：O(NlogN)
- * 空间复杂度：O(1)
+ * 空间复杂度：O(N)
  */
 public class MergeSort implements Sort<Integer> {
     private Integer[] temp;
@@ -19,19 +19,15 @@ public class MergeSort implements Sort<Integer> {
     }
 
     private void sort(Integer[] arr, int lo, int hi) {
-        if (lo >= hi) {
-            return;
-        }
+        if (lo >= hi) return;
         int mid = lo + (hi - lo) / 2;
         sort(arr, lo, mid);
         sort(arr, mid + 1, hi);
         merge(arr, lo, mid, hi);
     }
 
-    public void merge(Integer[] arr, int lo, int mid, int hi) {
-        for (int i = lo; i <= hi; i++) {
-            temp[i] = arr[i];
-        }
+    private void merge(Integer[] arr, int lo, int mid, int hi) {
+        System.arraycopy(arr, lo, temp, lo, hi - lo + 1);
 
         int i = lo, j = mid + 1;
         for (int k = lo; k <= hi; k++) {
@@ -40,7 +36,7 @@ public class MergeSort implements Sort<Integer> {
             } else if (j > hi) {
                 arr[k] = temp[i++];
             } else {
-                arr[k] = temp[i].compareTo(temp[j]) > 0 ? temp[j++] : temp[i++];
+                arr[k] = temp[i].compareTo(temp[j]) <= 0 ? temp[i++] : temp[j++];
             }
         }
     }

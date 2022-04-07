@@ -5,6 +5,8 @@ import xqk.learn.datastructurealgorithm.algorithm.sort.interfaces.Sort;
 /**
  * 选择排序：对于p，每次从p~length-1中选择最小的数插入到p-1位置
  * 平均时间复杂度：O(N^2)
+ * 最低时间复杂度：O(N^2)
+ * 最高时间复杂度：O(N^2)
  */
 public class SelectionSort implements Sort<Integer> {
     @Override
