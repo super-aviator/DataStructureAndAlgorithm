@@ -16,7 +16,8 @@ public class Sqrt {
         Sqrt sqrt = new Sqrt();
         System.out.println(sqrt.sqrt(9));
         System.out.println(sqrt.sqrtWithDecimal(147));
-        System.out.println(Math.pow(3,40));
+        System.out.println(sqrt.sqrtWithDecimal(2));
+        System.out.println(Math.pow(3, 40));
     }
 
     /**
@@ -34,9 +35,9 @@ public class Sqrt {
      * @return 算数平方根
      */
     public int sqrt(int num) {
-        int hi = num, ans = -1, lo = 0, mid = -1;
+        int hi = num, ans = -1, lo = 0;
         while (lo <= hi) {
-            mid = lo + (hi - lo) / 2;
+            int mid = lo + (hi - lo) / 2;
             if ((long) mid * mid <= num) {
                 ans = hi;
                 lo = mid + 1;
@@ -51,6 +52,59 @@ public class Sqrt {
      * 如何编程实现“求一个数的平方根”？要求精确到小数点后 6 位。
      *
      * @param num num
+     * @return int
+     */
+    public double sqrtWithRoundDecimal(int num, int precision) {
+
+        return 0;
+    }
+
+    // Java 实现
+    /**
+     * 求一个数的平方根，并保留指定精度
+     *
+     * @param n         给定数字，支持任意正数
+     * @param precision 保留精度
+     * @return 计算结果
+     */
+    public double sqrt(double n, int precision) {
+        if (n < 0) return Double.NaN;
+
+        double low = 0;
+        double high = n;
+        double ret = 0;
+
+        // 保留 precision 位小数
+        DecimalFormat df = new DecimalFormat("0." + "0".repeat(Math.max(0, precision)));
+
+        // 计算整数位和小数位，并考虑到四舍五入
+        for (int i = 0; i < precision + 2; i++) {
+            if (i > 0) {
+                low = 1;
+                high = 9;
+            }
+            while (low <= high) {
+                double mid = (low + high) / 2;
+                double tmp = BigDecimal.valueOf(ret).add(BigDecimal.valueOf(mid * Math.pow(10, -i))).doubleValue();
+                if (Math.pow(tmp, 2) == n) {
+                    return Double.parseDouble(df.format(tmp));
+                } else if (Math.pow(tmp, 2) < n) {
+                    low = mid + 1;
+                } else {
+                    high = mid - 1;
+                }
+            }
+
+            ret += high * Math.pow(10, -i);
+        }
+
+        return Double.parseDouble(df.format(ret));
+    }
+
+    /**
+     * 如何编程实现“求一个数的平方根”？要求精确到小数点后 6 位。
+     *
+     * @param num num
      */
     public double sqrtWithDecimal(int num) {
         return sqrtWithDecimal(BigDecimal.ZERO, BigDecimal.valueOf(num), num);
@@ -58,7 +112,6 @@ public class Sqrt {
 
     private double sqrtWithDecimal(BigDecimal low, BigDecimal high, int num) {
         BigDecimal mid = low.add(high).divide(BigDecimal.valueOf(2));
-        System.out.println(mid);
         BigDecimal product = mid.pow(2);
         if (product.doubleValue() == num) {
             DecimalFormat format = new DecimalFormat(".######");
