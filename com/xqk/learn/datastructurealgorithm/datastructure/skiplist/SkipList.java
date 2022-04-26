@@ -1,4 +1,4 @@
-package xqk.learn.datastructurealgorithm.datastructure;
+package xqk.learn.datastructurealgorithm.datastructure.skiplist;
 
 /**
  * SkipList-跳表
