@@ -3,7 +3,8 @@ package xqk.learn.datastructurealgorithm.algorithm.basic;
 
 import java.util.Arrays;
 
-import utils.arrays.ArrayUtils;
+import xqk.learn.datastructurealgorithm.utils.ArrayUtils;
+
 
 /**
  * 查找数组中第K大的元素

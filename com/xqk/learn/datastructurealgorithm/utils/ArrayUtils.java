@@ -1,4 +1,4 @@
-package utils.arrays;
+package xqk.learn.datastructurealgorithm.utils;
 
 public class ArrayUtils {
     public static <T> void swap(T[] arr,int x,int y){

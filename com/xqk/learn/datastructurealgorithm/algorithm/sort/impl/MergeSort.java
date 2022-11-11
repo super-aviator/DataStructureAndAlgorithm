@@ -15,29 +15,31 @@ public class MergeSort implements Sort<Integer> {
     @Override
     public void sort(Integer[] arr) {
         temp = new Integer[arr.length];
-        sort(arr, 0, arr.length - 1);
+        int lo = 0, hi = arr.length - 1;
+        sort(arr, lo, hi);
     }
 
-    private void sort(Integer[] arr, int lo, int hi) {
-        if (lo >= hi) return;
-        int mid = lo + (hi - lo) / 2;
+    public void sort(Integer[] arr, int lo, int hi) {
+        if (hi <= lo) {
+            return;
+        }
+        var mid = lo + ((hi - lo) >> 1);
         sort(arr, lo, mid);
         sort(arr, mid + 1, hi);
         merge(arr, lo, mid, hi);
     }
 
-    private void merge(Integer[] arr, int lo, int mid, int hi) {
-        System.arraycopy(arr, lo, temp, lo, hi - lo + 1);
-
-        int i = lo, j = mid + 1;
-        for (int k = lo; k <= hi; k++) {
-            if (i > mid) {
-                arr[k] = temp[j++];
-            } else if (j > hi) {
-                arr[k] = temp[i++];
-            } else {
-                arr[k] = temp[i].compareTo(temp[j]) <= 0 ? temp[i++] : temp[j++];
-            }
+    public void merge(Integer[] arr, int lo, int mid, int hi) {
+        //优化：当左右数组已经有序时不用再归并
+        if (arr[mid].compareTo(arr[mid + 1]) <= 0) {
+            return;
         }
+        System.arraycopy(arr, lo, temp, lo, hi - lo + 1);
+        int k = lo, i = lo, j = mid + 1;
+        while (i <= mid && j <= hi) {
+            arr[k++] = less(temp[i], temp[j]) ? temp[i++] : temp[j++];
+        }
+        while (i <= mid) arr[k++] = temp[i++];
+        while (j <= hi) arr[k++] = temp[j++];
     }
 }

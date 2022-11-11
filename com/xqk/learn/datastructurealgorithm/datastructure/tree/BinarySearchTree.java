@@ -186,6 +186,15 @@ public class BinarySearchTree<E extends Comparable<E>> {
         printInOrder(node.right, sb);
     }
 
+    public int level() {
+        return level(root, 0);
+    }
+
+    public int level(Node<E> node, int level) {
+        if (node == null) return level;
+        return Math.max(level(node.left, level + 1), level(node.right, level + 1));
+    }
+
     public static void main(String[] args) {
         var tree = new BinarySearchTree<Integer>();
         tree.insert(3);
@@ -201,6 +210,8 @@ public class BinarySearchTree<E extends Comparable<E>> {
         tree.printInOrder();
         tree.printPreOrder();
         tree.printPostOrder();
+        System.out.println("level:" + tree.level());
+        System.out.println("----");
 
         tree.delete(0);
         tree.delete(1);
@@ -212,6 +223,7 @@ public class BinarySearchTree<E extends Comparable<E>> {
         tree.printInOrder();
         tree.printPreOrder();
         tree.printPostOrder();
+        System.out.println("level:" + tree.level());
     }
 }
 

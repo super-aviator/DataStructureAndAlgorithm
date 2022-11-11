@@ -5,10 +5,10 @@ package xqk.learn.datastructurealgorithm.datastructure.skiplist;
  * 查找时间复杂度：O(logN)
  * 空间复杂度：O(N)
  * 插入删除时间复杂度：O(logN)
- *
+ * <p>
  * 跳表的一种实现方法。
  * 跳表中存储的是正整数，并且存储的是不重复的。
- *
+ * <p>
  * Author：ZHENG
  */
 public class SkipList {
@@ -18,29 +18,25 @@ public class SkipList {
 
     private int levelCount = 1;
 
-    private Node head = new Node();  // 带头链表
+    public static class Node {
+        private int data = -1;
+        private final Node[] next = new Node[MAX_LEVEL];
+        private int maxLevel = 0;
 
-    public Node find(int value) {
-        Node p = head;
-        for (int i = levelCount - 1; i >= 0; --i) {
-            while (p.forwards[i] != null && p.forwards[i].data < value) {
-                p = p.forwards[i];
-            }
-        }
-
-        if (p.forwards[0] != null && p.forwards[0].data == value) {
-            return p.forwards[0];
-        } else {
-            return null;
+        @Override
+        public String toString() {
+            return "{ data: " + data + "; levels: " + maxLevel + " }";
         }
     }
+
+    private final Node head = new Node();  // 带头链表
 
     public void insert(int value) {
         int level = randomLevel();
         Node newNode = new Node();
         newNode.data = value;
         newNode.maxLevel = level;
-        Node update[] = new Node[level];
+        Node[] update = new Node[level];
         for (int i = 0; i < level; ++i) {
             update[i] = head;
         }
@@ -48,41 +44,56 @@ public class SkipList {
         // record every level largest value which smaller than insert value in update[]
         Node p = head;
         for (int i = level - 1; i >= 0; --i) {
-            while (p.forwards[i] != null && p.forwards[i].data < value) {
-                p = p.forwards[i];
+            while (p.next[i] != null && p.next[i].data < value) {
+                p = p.next[i];
             }
             update[i] = p;// use update save node in search path
         }
 
         // in search path node next node become new node forwords(next)
         for (int i = 0; i < level; ++i) {
-            newNode.forwards[i] = update[i].forwards[i];
-            update[i].forwards[i] = newNode;
+            newNode.next[i] = update[i].next[i];
+            update[i].next[i] = newNode;
         }
 
         // update node hight
         if (levelCount < level) levelCount = level;
     }
 
+    public Node find(int value) {
+        Node p = head;
+        for (int i = levelCount - 1; i >= 0; --i) {
+            while (p.next[i] != null && p.next[i].data < value) {
+                p = p.next[i];
+            }
+        }
+
+        if (p.next[0] != null && p.next[0].data == value) {
+            return p.next[0];
+        } else {
+            return null;
+        }
+    }
+
     public void delete(int value) {
         Node[] update = new Node[levelCount];
         Node p = head;
         for (int i = levelCount - 1; i >= 0; --i) {
-            while (p.forwards[i] != null && p.forwards[i].data < value) {
-                p = p.forwards[i];
+            while (p.next[i] != null && p.next[i].data < value) {
+                p = p.next[i];
             }
             update[i] = p;
         }
 
-        if (p.forwards[0] != null && p.forwards[0].data == value) {
+        if (p.next[0] != null && p.next[0].data == value) {
             for (int i = levelCount - 1; i >= 0; --i) {
-                if (update[i].forwards[i] != null && update[i].forwards[i].data == value) {
-                    update[i].forwards[i] = update[i].forwards[i].forwards[i];
+                if (update[i].next[i] != null && update[i].next[i].data == value) {
+                    update[i].next[i] = update[i].next[i].next[i];
                 }
             }
         }
 
-        while (levelCount>1&&head.forwards[levelCount]==null){
+        while (levelCount>1&&head.next[levelCount]==null){
             levelCount--;
         }
 
@@ -104,29 +115,11 @@ public class SkipList {
 
     public void printAll() {
         Node p = head;
-        while (p.forwards[0] != null) {
-            System.out.print(p.forwards[0] + " ");
-            p = p.forwards[0];
+        while (p.next[0] != null) {
+            System.out.print(p.next[0] + " ");
+            p = p.next[0];
         }
         System.out.println();
-    }
-
-    public class Node {
-        private int data = -1;
-        private Node forwards[] = new Node[MAX_LEVEL];
-        private int maxLevel = 0;
-
-        @Override
-        public String toString() {
-            StringBuilder builder = new StringBuilder();
-            builder.append("{ data: ");
-            builder.append(data);
-            builder.append("; levels: ");
-            builder.append(maxLevel);
-            builder.append(" }");
-
-            return builder.toString();
-        }
     }
 
 }

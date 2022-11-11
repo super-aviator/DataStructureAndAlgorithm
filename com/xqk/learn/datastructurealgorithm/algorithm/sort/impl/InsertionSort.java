@@ -14,15 +14,11 @@ import xqk.learn.datastructurealgorithm.algorithm.sort.interfaces.Sort;
 public class InsertionSort implements Sort<Integer> {
     @Override
     public void sort(Integer[] arr) {
-        for (int i = 1; i < arr.length; i++) {
-            int j = i;
-            var temp = arr[i];
-            for (; j > 0; j--) {
-                if (temp.compareTo(arr[j - 1]) < 0) {
-                    arr[j] = arr[j - 1];
-                } else {
-                    break;
-                }
+        for (int i = 0; i < arr.length - 1; i++) {
+            var j = i + 1;
+            var temp = arr[j];
+            for (; j > 0 && arr[j - 1].compareTo(temp) > 0; j--) {
+                arr[j] = arr[j - 1];
             }
             arr[j] = temp;
         }
